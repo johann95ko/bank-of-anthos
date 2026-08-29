@@ -34,6 +34,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "markupsafe!=3.0.3",
     "pylint>=3.0",
     "pytest>=7.4.4",
     "pytest-cov>=4.1.0",
@@ -41,6 +42,7 @@ dev = [
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+importmode = "importlib"
 
 [tool.coverage.run]
 source = ["."]
