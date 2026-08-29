@@ -21,7 +21,7 @@ from unittest.mock import MagicMock, Mock, mock_open, patch
 
 from requests.exceptions import HTTPError, RequestException
 
-from frontend import create_app  # pylint: disable=wrong-import-position
+from frontend import create_app
 
 from tests.constants import (
     EXAMPLE_ACCOUNT,
