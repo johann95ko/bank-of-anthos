@@ -535,19 +535,48 @@
           "fingerprint": "75db5653ddb97b0f",
           "intent": "",
           "signature": "AccountInfo(Long balance, Deque<Transaction> transactions)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfoTest.java::gettersReturnConstructorArguments",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenSenderBalanceTooLow",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionSucceedsWhenSenderBalanceCoversAmount",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsAppliesExtraLatency",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfo.java::AccountInfo.getBalance": {
           "fingerprint": "55fcabc13da7f52a",
           "intent": "",
           "signature": "getBalance()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfoTest.java::gettersReturnConstructorArguments",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenAccountDoesNotMatchAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenCacheErrors",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenTokenIsNotValid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadDefaultsBalanceToZeroWhenAccountHasNoTransactions",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadReadsBalanceAndTransactionsFromDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfo.java::AccountInfo.getTransactions": {
           "fingerprint": "3dda1db2acba315c",
           "intent": "",
           "signature": "getTransactions()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfoTest.java::gettersReturnConstructorArguments",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsAppliesExtraLatency",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenAccountDoesNotMatchAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenCacheErrors",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenTokenIsNotValid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadDefaultsBalanceToZeroWhenAccountHasNoTransactions",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadReadsBalanceAndTransactionsFromDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGenerator.java::GenerateKeyException.GenerateKeyException": {
           "fingerprint": "4ddf16af3540724c",
@@ -559,7 +588,12 @@
           "fingerprint": "6a115f4c56cc6a1c",
           "intent": "",
           "signature": "generateJWTVerifier(@Value(\"${PUB_KEY_PATH}\") final String publicKeyPath)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsKeyWithoutPemHeaders",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsTokensSignedWithMatchingKey",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyFileMissing",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyIsNotRsa"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithApplication.java::LedgerMonolithApplication.main": {
           "fingerprint": "ee14ad20d8fc1e5d",
@@ -571,19 +605,33 @@
           "fingerprint": "1e8f145aee60d8ae",
           "intent": "",
           "signature": "restTemplate()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithApplicationTest.java::restTemplateBeanIsCreated"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.LedgerMonolithController": {
           "fingerprint": "5725e48f56731b1c",
           "intent": "",
           "signature": "LedgerMonolithController(@Value(\"${PUB_KEY_PATH}\") final String publicKeyPath, LoadingCache<String, AccountInfo> ledgerReaderCache, JWTVerifier verifier, TransactionRepository transactionRepository, TransactionValidator transactionValidator, LedgerReader reader, @Value(\"${LOCAL_ROUTING_NUM}\") String localRoutingNum, @Value(\"${VERSION}\") String version)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::setUp"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.addTransaction": {
           "fingerprint": "730ae2438f2c19e4",
           "intent": "",
           "signature": "addTransaction(@RequestHeader(\"Authorization\") String bearerToken, @RequestBody Transaction transaction)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenAuthorizationHeaderIsNull",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenBalanceCacheErrors",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenDatabaseUnreachable",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenSenderBalanceTooLow",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenTokenIsNotValid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenTransactionIsDuplicate",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenTransactionIsInvalid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionSucceedsWhenSenderBalanceCoversAmount",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionSucceedsWhenSenderIsExternal"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.getAvailableBalance": {
           "fingerprint": "5dc65d0cd0f26a1c",
@@ -595,37 +643,68 @@
           "fingerprint": "543ea0a8fe9c1247",
           "intent": "",
           "signature": "getBalance(@RequestHeader(\"Authorization\") String bearerToken, @PathVariable String accountId)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfoTest.java::gettersReturnConstructorArguments",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenAccountDoesNotMatchAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenCacheErrors",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceFailsWhenTokenIsNotValid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getBalanceSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadDefaultsBalanceToZeroWhenAccountHasNoTransactions",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadReadsBalanceAndTransactionsFromDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.getTransactions": {
           "fingerprint": "adf5437a60a1ecac",
           "intent": "",
           "signature": "getTransactions(@RequestHeader(\"Authorization\") String bearerToken, @PathVariable String accountId)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/AccountInfoTest.java::gettersReturnConstructorArguments",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsAppliesExtraLatency",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenAccountDoesNotMatchAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenCacheErrors",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsFailsWhenTokenIsNotValid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::getTransactionsSucceedsWhenAccountMatchesAuthenticatedUser",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadDefaultsBalanceToZeroWhenAccountHasNoTransactions",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::loadReadsBalanceAndTransactionsFromDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.liveness": {
           "fingerprint": "c3bea930d24aa825",
           "intent": "",
           "signature": "liveness()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::livenessFailsWhenLedgerReaderIsNotAlive",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::livenessSucceedsWhenLedgerReaderIsAlive"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.processTransaction": {
           "fingerprint": "67e04227e6c2c62e",
           "intent": "",
           "signature": "processTransaction(String accountId, Long newBalance, Transaction transaction)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackIgnoresUncachedAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackUpdatesBothCachedAccounts"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.readiness": {
           "fingerprint": "f7dd67965f9ccf13",
           "intent": "",
           "signature": "readiness()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::readiness"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithController.java::LedgerMonolithController.version": {
           "fingerprint": "a25a82036ebbe921",
           "intent": "",
           "signature": "version()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::version"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReader.java::LedgerReader.getLatestTransactionId": {
           "fingerprint": "e2835101b8db0a5d",
@@ -637,7 +716,13 @@
           "fingerprint": "8cfaeba94850dee5",
           "intent": "",
           "signature": "isAlive()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::livenessFailsWhenLedgerReaderIsNotAlive",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::livenessSucceedsWhenLedgerReaderIsAlive",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::isAliveWhenBackgroundThreadNotStarted",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::pollsNewTransactionsAndExecutesCallback",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::startWithCallbackToleratesUnreachableDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReader.java::LedgerReader.pollTransactions": {
           "fingerprint": "971ecc9944573575",
@@ -655,13 +740,20 @@
           "fingerprint": "f07362324bb7b3f2",
           "intent": "",
           "signature": "startWithCallback(LedgerReaderCallback callback)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::captureLedgerReaderCallback",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::pollsNewTransactionsAndExecutesCallback",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::startWithCallbackFailsWhenCallbackIsNull",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::startWithCallbackToleratesUnreachableDatabase"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCache.java::LedgerReaderCache.initializeCache": {
           "fingerprint": "bcb8d821d2f8cc76",
           "intent": "",
           "signature": "initializeCache(@Value(\"${CACHE_SIZE:1000000}\") final Integer expireSize, @Value(\"${CACHE_MINUTES:60}\") final Integer expireMinutes, @Value(\"${LOCAL_ROUTING_NUM}\") String localRoutingNum, @Value(\"${HISTORY_LIMIT:100}\") Integer historyLimit)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCacheTest.java::setUp"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderCache.java::LedgerReaderCache.load": {
           "fingerprint": "f66d429dc170e9c1",
@@ -673,55 +765,120 @@
           "fingerprint": "6d5385f5fddf9c25",
           "intent": "",
           "signature": "getAmount()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenLocalTransactionBetweenAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenTransaction",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::setUp",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionSuccess",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenTransactionAmount_IsInvalid"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getFromAccountNum": {
           "fingerprint": "83f43f5512f1c215",
           "intent": "",
           "signature": "getFromAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenLocalTransactionBetweenAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenTransaction",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::setUp",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionFailWhenNotAuthenticated",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenSenderAccountNumber_IsInvalid"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getFromRoutingNum": {
           "fingerprint": "10e573b5be00967c",
           "intent": "",
           "signature": "getFromRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenLocalTransactionBetweenAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenTransaction",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::setUp",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenSenderRoutingNumber_IsInvalid"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getRequestUuid": {
           "fingerprint": "4131f4383f9ee14c",
           "intent": "",
           "signature": "getRequestUuid()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenTransaction",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::getRequestUuidDefaultsToEmptyString",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::getRequestUuidReturnsUuidWhenSet"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getToAccountNum": {
           "fingerprint": "db251d319def5193",
           "intent": "",
           "signature": "getToAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenLocalTransactionBetweenAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::setUp",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionFailWhenSenderIsReceiver",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenReceiverAccountNumber_IsValid"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getToRoutingNum": {
           "fingerprint": "cb71c3321743b9cb",
           "intent": "",
           "signature": "getToRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::givenLocalTransactionBetweenAccounts",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::ledgerReaderCallbackDropsOldestTransactionAtHistoryLimit",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::setUp",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionFailWhenSenderIsReceiver",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenReceiverRoutingNumber_IsValid"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.getTransactionId": {
           "fingerprint": "2b1311a6af89bf27",
           "intent": "",
           "signature": "getTransactionId()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerReaderTest.java::pollsNewTransactionsAndExecutesCallback",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::gettersReturnTransactionFields"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/Transaction.java::Transaction.toString": {
           "fingerprint": "9eea7f162d479085",
           "intent": "",
           "signature": "toString()",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsKeyWithoutPemHeaders",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsTokensSignedWithMatchingKey",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyFileMissing",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyIsNotRsa",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionTest.java::toStringRendersAmountInDollars"
+          ]
         },
         "src/ledgermonolith/src/main/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidator.java::TransactionValidator.validateTransaction": {
           "fingerprint": "83bac2ece70ece8d",
           "intent": "",
           "signature": "validateTransaction(String localRoutingNum, String authedAcct, Transaction transaction)",
-          "tests": []
+          "tests": [
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/LedgerMonolithControllerTest.java::addTransactionFailsWhenTransactionIsInvalid",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::assertInvalidNumberHelper",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::for",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionFailWhenNotAuthenticated",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionFailWhenSenderIsReceiver",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validateTransactionSuccess",
+            "src/ledgermonolith/src/test/java/anthos/samples/bankofanthos/ledgermonolith/TransactionValidatorTest.java::validationFail_WhenTransactionAmount_IsInvalid"
+          ]
         }
       }
     },
