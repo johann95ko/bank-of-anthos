@@ -1,0 +1,120 @@
+{
+  "min_coverage": 80,
+  "services": [
+    {
+      "name": "contacts",
+      "path": "src/accounts/contacts",
+      "language": "python",
+      "sources": [
+        "*.py"
+      ],
+      "exclude": [
+        "tests/**",
+        "__init__.py",
+        ".venv/**"
+      ],
+      "tests": "tests",
+      "command": "uv run pytest -q -p no:warnings --cov=. --cov-report=xml:coverage.xml",
+      "report": "coverage.xml"
+    },
+    {
+      "name": "userservice",
+      "path": "src/accounts/userservice",
+      "language": "python",
+      "sources": [
+        "*.py"
+      ],
+      "exclude": [
+        "tests/**",
+        "__init__.py",
+        ".venv/**"
+      ],
+      "tests": "tests",
+      "command": "uv run pytest -q -p no:warnings --cov=. --cov-report=xml:coverage.xml",
+      "report": "coverage.xml"
+    },
+    {
+      "name": "frontend",
+      "path": "src/frontend",
+      "language": "python",
+      "sources": [
+        "*.py"
+      ],
+      "exclude": [
+        "tests/**",
+        "__init__.py",
+        ".venv/**"
+      ],
+      "tests": "tests",
+      "command": "uv run pytest -q -p no:warnings --cov=. --cov-report=xml:coverage.xml",
+      "report": "coverage.xml"
+    },
+    {
+      "name": "loadgenerator",
+      "path": "src/loadgenerator",
+      "language": "python",
+      "sources": [
+        "*.py"
+      ],
+      "exclude": [
+        "tests/**",
+        ".venv/**"
+      ],
+      "tests": "tests",
+      "command": "uv run pytest -q -p no:warnings --cov=. --cov-report=xml:coverage.xml",
+      "report": "coverage.xml"
+    },
+    {
+      "name": "balancereader",
+      "path": "src/ledger/balancereader",
+      "language": "java",
+      "sources": [
+        "src/main/java/**/*.java"
+      ],
+      "exclude": [],
+      "tests": "src/test/java",
+      "command": "./mvnw -q verify -f src/ledger/balancereader/pom.xml",
+      "command_cwd": ".",
+      "report": "target/site/jacoco/jacoco.csv"
+    },
+    {
+      "name": "ledgerwriter",
+      "path": "src/ledger/ledgerwriter",
+      "language": "java",
+      "sources": [
+        "src/main/java/**/*.java"
+      ],
+      "exclude": [],
+      "tests": "src/test/java",
+      "command": "./mvnw -q verify -f src/ledger/ledgerwriter/pom.xml",
+      "command_cwd": ".",
+      "report": "target/site/jacoco/jacoco.csv"
+    },
+    {
+      "name": "transactionhistory",
+      "path": "src/ledger/transactionhistory",
+      "language": "java",
+      "sources": [
+        "src/main/java/**/*.java"
+      ],
+      "exclude": [],
+      "tests": "src/test/java",
+      "command": "./mvnw -q verify -f src/ledger/transactionhistory/pom.xml",
+      "command_cwd": ".",
+      "report": "target/site/jacoco/jacoco.csv"
+    },
+    {
+      "name": "ledgermonolith",
+      "path": "src/ledgermonolith",
+      "language": "java",
+      "sources": [
+        "src/main/java/**/*.java"
+      ],
+      "exclude": [],
+      "tests": "src/test/java",
+      "command": "./mvnw -q verify -f src/ledgermonolith/pom.xml",
+      "command_cwd": ".",
+      "report": "target/site/jacoco/jacoco.csv"
+    }
+  ]
+}
