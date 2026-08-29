@@ -1059,7 +1059,12 @@
           "fingerprint": "6a115f4c56cc6a1c",
           "intent": "",
           "signature": "generateJWTVerifier(@Value(\"${PUB_KEY_PATH}\") final String publicKeyPath)",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::generatesVerifierForMatchingKeyPair",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::malformedKeyFailsVerifierGeneration",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::missingKeyFileFailsVerifierGeneration",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::verifierRejectsTokenFromDifferentKey"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/LedgerReader.java::LedgerReader.getLatestTransactionId": {
           "fingerprint": "e2835101b8db0a5d",
@@ -1072,6 +1077,9 @@
           "intent": "",
           "signature": "isAlive()",
           "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::awaitThreadDeath",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::backgroundThreadProcessesNewTransactions",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::startWithCallbackRejectsNullCallback",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::livenessFailsWhenLedgerReaderIsNotAlive",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::livenessSucceedsWhenLedgerReaderIsAlive"
           ]
@@ -1092,55 +1100,85 @@
           "fingerprint": "76e37f169976479f",
           "intent": "",
           "signature": "startWithCallback(LedgerReaderCallback callback)",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::backgroundThreadProcessesNewTransactions",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::emptyLedgerStartsFromBeginningOfLedger",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::idleLedgerProcessesNothing",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::startWithCallbackRejectsNullCallback",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::unreachableDatabaseDoesNotKillTheReader",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::ledgerCallback"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getAmount": {
           "fingerprint": "6d5385f5fddf9c25",
           "intent": "",
           "signature": "getAmount()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getFromAccountNum": {
           "fingerprint": "83f43f5512f1c215",
           "intent": "",
           "signature": "getFromAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getFromRoutingNum": {
           "fingerprint": "10e573b5be00967c",
           "intent": "",
           "signature": "getFromRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getToAccountNum": {
           "fingerprint": "db251d319def5193",
           "intent": "",
           "signature": "getToAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getToRoutingNum": {
           "fingerprint": "cb71c3321743b9cb",
           "intent": "",
           "signature": "getToRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.getTransactionId": {
           "fingerprint": "2b1311a6af89bf27",
           "intent": "",
           "signature": "getTransactionId()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::backgroundThreadProcessesNewTransactions",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::emptyLedgerStartsFromBeginningOfLedger",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::gettersReturnPersistedValues"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/Transaction.java::Transaction.toString": {
           "fingerprint": "9eea7f162d479085",
           "intent": "",
           "signature": "toString()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::generatesVerifierForMatchingKeyPair",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::malformedKeyFailsVerifierGeneration",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::missingKeyFileFailsVerifierGeneration",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/JWTVerifierGeneratorTest.java::verifierRejectsTokenFromDifferentKey",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::toStringFormatsAmountAsDollars",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionTest.java::toStringFormatsSubDollarAmount"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionCache.java::TransactionCache.initializeCache": {
           "fingerprint": "7e2989448a098073",
           "intent": "",
           "signature": "initializeCache(@Value(\"${CACHE_SIZE:1000000}\") final Integer expireSize, @Value(\"${CACHE_MINUTES:60}\") final Integer expireMinutes, @Value(\"${LOCAL_ROUTING_NUM}\") String localRoutingNum, @Value(\"${HISTORY_LIMIT:100}\") Integer historyLimit)",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionCacheTest.java::setUp"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionCache.java::TransactionCache.load": {
           "fingerprint": "8ea51331bb3af405",
@@ -1152,13 +1190,16 @@
           "fingerprint": "4f1d144376aab684",
           "intent": "",
           "signature": "destroy()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::destroyDoesNotFail"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplication.java::TransactionHistoryApplication.enabled": {
           "fingerprint": "6c1e9866a483ea56",
           "intent": "",
           "signature": "enabled()",
           "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverRegistryHonoursDisabledMetricsExport",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::StackdriverConfig",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::setUp"
           ]
@@ -1168,7 +1209,19 @@
           "intent": "",
           "signature": "get(String key)",
           "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::awaitThreadDeath",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::backgroundThreadProcessesNewTransactions",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/LedgerReaderTest.java::emptyLedgerStartsFromBeginningOfLedger",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TestFields.java::get",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionCacheTest.java::cacheLoadsTransactionsFromDatabase",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionCacheTest.java::cachePagesQueryToHistoryLimit",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionCacheTest.java::cachePropagatesDatabaseFailure",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfig",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfigDescribesKubernetesContainer",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfigHasNoPropertyOverrides",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::StackdriverConfig",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsAcceptsRawToken",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsAppliesArtificialLatency",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsFailsWhenCacheThrowsError",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsSucceedsWhenAccountMatchesAuthenticatedUser",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::setUp"
@@ -1185,6 +1238,7 @@
           "intent": "",
           "signature": "projectId()",
           "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfigHasNoPropertyOverrides",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::StackdriverConfig",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::setUp"
           ]
@@ -1193,19 +1247,25 @@
           "fingerprint": "ddc330f3ecd6226b",
           "intent": "",
           "signature": "resourceLabels()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfigDescribesKubernetesContainer"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplication.java::TransactionHistoryApplication.resourceType": {
           "fingerprint": "6c27e1891630f94a",
           "intent": "",
           "signature": "resourceType()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::stackdriverConfigDescribesKubernetesContainer"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplication.java::TransactionHistoryApplication.stackdriver": {
           "fingerprint": "a87e0145d680f645",
           "intent": "",
           "signature": "stackdriver()",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryApplicationTest.java::setUp"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryController.java::TransactionHistoryController.TransactionHistoryController": {
           "fingerprint": "6233ac5bac871968",
@@ -1220,6 +1280,8 @@
           "intent": "",
           "signature": "getTransactions(@RequestHeader(\"Authorization\") String bearerToken, @PathVariable String accountId)",
           "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsAcceptsRawToken",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsAppliesArtificialLatency",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsFailsWhenAccountDoesNotMatchAuthenticatedUser",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsFailsWhenCacheThrowsError",
             "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::getTransactionsFailsWhenUserNotAuthenticated",
@@ -1239,7 +1301,12 @@
           "fingerprint": "7a4a9828a56cac82",
           "intent": "",
           "signature": "processTransaction(String accountId, Transaction transaction)",
-          "tests": []
+          "tests": [
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::ledgerCallbackCachesTransactionsForBothLocalAccounts",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::ledgerCallbackDropsTransactionsBeyondHistoryLimit",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::ledgerCallbackIgnoresRemoteRoutingNumbers",
+            "src/ledger/transactionhistory/src/test/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryControllerTest.java::ledgerCallbackIgnoresUncachedAccounts"
+          ]
         },
         "src/ledger/transactionhistory/src/main/java/anthos/samples/bankofanthos/transactionhistory/TransactionHistoryController.java::TransactionHistoryController.readiness": {
           "fingerprint": "778a3bc5e3d89bc6",
