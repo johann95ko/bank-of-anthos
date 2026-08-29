@@ -17,8 +17,8 @@
 import time
 
 import jwt
-from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.asymmetric import padding, rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
 
 
 def _keypair():
@@ -86,22 +86,3 @@ EXAMPLE_CONTACTS = [
         "is_external": False,
     },
 ]
-
-
-def sign_payload(payload=None):
-    """Return a token signed by the test private key."""
-    return jwt.encode(
-        payload or EXAMPLE_PAYLOAD,
-        EXAMPLE_PRIVATE_KEY,
-        algorithm="RS256",
-    )
-
-
-def sign_with_cryptography(payload=None):
-    """Exercise the generated key material through cryptography as well."""
-    key = serialization.load_pem_private_key(EXAMPLE_PRIVATE_KEY, password=None)
-    return key.sign(
-        (payload or b"frontend-test"),
-        padding.PKCS1v15(),
-        hashes.SHA256(),
-    )

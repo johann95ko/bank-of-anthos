@@ -15,26 +15,12 @@
 """Tests for the frontend Flask application."""
 
 import json
-import importlib.util
-import os
-import sys
 import unittest
 from urllib.parse import unquote_plus
 from unittest.mock import MagicMock, Mock, mock_open, patch
 
 from requests.exceptions import HTTPError, RequestException
 
-# Prefer the service's flat-module layout over the repository package name.
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-if "frontend" in sys.modules:
-    del sys.modules["frontend"]
-_frontend_spec = importlib.util.spec_from_file_location(
-    "frontend", os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend.py")
-)
-_frontend_module = importlib.util.module_from_spec(_frontend_spec)
-sys.modules["frontend"] = _frontend_module
-_frontend_spec.loader.exec_module(_frontend_module)
-import frontend  # pylint: disable=wrong-import-position
 from frontend import create_app  # pylint: disable=wrong-import-position
 
 from tests.constants import (
