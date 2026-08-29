@@ -343,187 +343,307 @@
           "fingerprint": "f831feb345808796",
           "intent": "Initialize an API call",
           "signature": "__init__(self, display_name, api_request, logger)",
-          "tests": []
+          "tests": [
+            "tests/test_api_call.py::TestApiCall::test_api_call_stores_values"
+          ]
         },
         "src/frontend/api_call.py::ApiCall.make_call": {
           "fingerprint": "e2fabcf038514308",
           "intent": "Making an API call",
           "signature": "make_call(self)",
-          "tests": []
+          "tests": [
+            "tests/test_api_call.py::TestApiCall::test_make_call_request_exception",
+            "tests/test_api_call.py::TestApiCall::test_make_call_success"
+          ]
         },
         "src/frontend/api_call.py::ApiRequest.__init__": {
           "fingerprint": "30151fb6adf912c9",
           "intent": "Initialize an API request",
           "signature": "__init__(self, url, headers, timeout)",
-          "tests": []
+          "tests": [
+            "tests/test_api_call.py::TestApiCall::test_api_call_stores_values"
+          ]
         },
         "src/frontend/frontend.py::create_app": {
           "fingerprint": "7ba535b5f3af84f2",
           "intent": "Flask application factory to create instances",
           "signature": "create_app()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_consent_post_approve_and_deny",
+            "tests/test_frontend.py::TestFrontend::test_deposit_existing_account_happy_path",
+            "tests/test_frontend.py::TestFrontend::test_deposit_new_external_account",
+            "tests/test_frontend.py::TestFrontend::test_deposit_request_failure",
+            "tests/test_frontend.py::TestFrontend::test_deposit_requires_authentication",
+            "tests/test_frontend.py::TestFrontend::test_home_rejects_missing_expired_and_foreign_tokens",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels",
+            "tests/test_frontend.py::TestFrontend::test_home_uses_default_values_when_api_calls_fail",
+            "tests/test_frontend.py::TestFrontend::test_login_get_branches",
+            "tests/test_frontend.py::TestFrontend::test_login_post_failures",
+            "tests/test_frontend.py::TestFrontend::test_login_post_success_and_oauth_redirect",
+            "tests/test_frontend.py::TestFrontend::test_logout_deletes_authentication_cookies",
+            "tests/test_frontend.py::TestFrontend::test_payment_contact_failure_is_reported",
+            "tests/test_frontend.py::TestFrontend::test_payment_happy_path_and_new_contact",
+            "tests/test_frontend.py::TestFrontend::test_payment_requires_authentication",
+            "tests/test_frontend.py::TestFrontend::test_payment_transaction_failure_and_invalid_amount",
+            "tests/test_frontend.py::TestFrontend::test_platform_configuration",
+            "tests/test_frontend.py::TestFrontend::test_probe_endpoints_and_root",
+            "tests/test_frontend.py::TestFrontend::test_signup_page_and_submission",
+            "tests/test_frontend.py::TestFrontend::test_template_formatters",
+            "tests/test_frontend.py::TestFrontend::test_tracing_enabled_initializes_instrumentation"
+          ]
         },
         "src/frontend/frontend.py::create_app._add_contact": {
           "fingerprint": "0d79caf25dd4974b",
           "intent": "Submits a new contact to the contact service.",
           "signature": "_add_contact(label, acct_num, routing_num, is_external_acct)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_deposit_new_external_account",
+            "tests/test_frontend.py::TestFrontend::test_payment_contact_failure_is_reported"
+          ]
         },
         "src/frontend/frontend.py::create_app._auth_callback_helper": {
           "fingerprint": "e92088da9eabc08b",
           "intent": "",
           "signature": "_auth_callback_helper(state, redirect_uri, token)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches"
+          ]
         },
         "src/frontend/frontend.py::create_app._login_helper": {
           "fingerprint": "9c1bbc3b963581f3",
           "intent": "",
           "signature": "_login_helper(username, password, request_args)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_login_post_failures",
+            "tests/test_frontend.py::TestFrontend::test_login_post_success_and_oauth_redirect"
+          ]
         },
         "src/frontend/frontend.py::create_app._populate_contact_labels": {
           "fingerprint": "841d558f84c8ada4",
           "intent": "Populate contact labels for the passed transactions.",
           "signature": "_populate_contact_labels(account_id, transactions, contacts)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels",
+            "tests/test_frontend.py::TestFrontend::test_home_uses_default_values_when_api_calls_fail"
+          ]
         },
         "src/frontend/frontend.py::create_app._submit_transaction": {
           "fingerprint": "25e6dca1c7024adb",
           "intent": "",
           "signature": "_submit_transaction(transaction_data)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_deposit_existing_account_happy_path",
+            "tests/test_frontend.py::TestFrontend::test_payment_transaction_failure_and_invalid_amount"
+          ]
         },
         "src/frontend/frontend.py::create_app.consent": {
           "fingerprint": "1272ae66bf0a50ab",
           "intent": "Check consent, write cookie if yes, and redirect accordingly",
           "signature": "consent()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_consent_post_approve_and_deny"
+          ]
         },
         "src/frontend/frontend.py::create_app.consent_page": {
           "fingerprint": "446aca3206f94ace",
           "intent": "Renders consent page.",
           "signature": "consent_page()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches"
+          ]
         },
         "src/frontend/frontend.py::create_app.decode_token": {
           "fingerprint": "4a9fbf9c56778ab2",
           "intent": "",
           "signature": "decode_token(token)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_deposit_existing_account_happy_path"
+          ]
         },
         "src/frontend/frontend.py::create_app.deposit": {
           "fingerprint": "483bc065b13c299d",
           "intent": "Submits deposit request to ledgerwriter service",
           "signature": "deposit()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_deposit_existing_account_happy_path",
+            "tests/test_frontend.py::TestFrontend::test_deposit_new_external_account",
+            "tests/test_frontend.py::TestFrontend::test_deposit_request_failure",
+            "tests/test_frontend.py::TestFrontend::test_deposit_requires_authentication"
+          ]
         },
         "src/frontend/frontend.py::create_app.format_currency": {
           "fingerprint": "c55906175faca024",
           "intent": "Format the input currency in a human readable way",
           "signature": "format_currency(int_amount)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels",
+            "tests/test_frontend.py::TestFrontend::test_home_uses_default_values_when_api_calls_fail",
+            "tests/test_frontend.py::TestFrontend::test_template_formatters"
+          ]
         },
         "src/frontend/frontend.py::create_app.format_timestamp_day": {
           "fingerprint": "9d0e14de71f57bfa",
           "intent": "Format the input timestamp day in a human readable way",
           "signature": "format_timestamp_day(timestamp)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels"
+          ]
         },
         "src/frontend/frontend.py::create_app.format_timestamp_month": {
           "fingerprint": "42649818dce33631",
           "intent": "Format the input timestamp month in a human readable way",
           "signature": "format_timestamp_month(timestamp)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels"
+          ]
         },
         "src/frontend/frontend.py::create_app.home": {
           "fingerprint": "f870fa841e249f0c",
           "intent": "Renders home page. Redirects to /login if token is not valid",
           "signature": "home()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_rejects_missing_expired_and_foreign_tokens",
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels"
+          ]
         },
         "src/frontend/frontend.py::create_app.login": {
           "fingerprint": "e6bbed784f3348cb",
           "intent": "Submits login request to userservice and saves resulting token",
           "signature": "login()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_login_post_failures"
+          ]
         },
         "src/frontend/frontend.py::create_app.login_page": {
           "fingerprint": "74a7f9b75ff0764c",
           "intent": "Renders login page. Redirects to /home if user already has a valid token.",
           "signature": "login_page()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_login_get_branches"
+          ]
         },
         "src/frontend/frontend.py::create_app.logout": {
           "fingerprint": "417a227bb9955326",
           "intent": "Logs out user by deleting token cookie and redirecting to login page",
           "signature": "logout()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_logout_deletes_authentication_cookies"
+          ]
         },
         "src/frontend/frontend.py::create_app.payment": {
           "fingerprint": "d799decc8bdc1e64",
           "intent": "Submits payment request to ledgerwriter service",
           "signature": "payment()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_payment_contact_failure_is_reported",
+            "tests/test_frontend.py::TestFrontend::test_payment_happy_path_and_new_contact",
+            "tests/test_frontend.py::TestFrontend::test_payment_requires_authentication",
+            "tests/test_frontend.py::TestFrontend::test_payment_transaction_failure_and_invalid_amount"
+          ]
         },
         "src/frontend/frontend.py::create_app.readiness": {
           "fingerprint": "6a7d2073569839ef",
           "intent": "Readiness probe",
           "signature": "readiness()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_probe_endpoints_and_root"
+          ]
         },
         "src/frontend/frontend.py::create_app.root": {
           "fingerprint": "4c1e06e0e8a3ad96",
           "intent": "Renders home page or login page, depending on authentication status.",
           "signature": "root()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_probe_endpoints_and_root"
+          ]
         },
         "src/frontend/frontend.py::create_app.signup": {
           "fingerprint": "5a838f05aa47834a",
           "intent": "Submits signup request to userservice",
           "signature": "signup()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_signup_page_and_submission"
+          ]
         },
         "src/frontend/frontend.py::create_app.signup_page": {
           "fingerprint": "33304b4b59d564b5",
           "intent": "Renders signup page. Redirects to /login if token is not valid",
           "signature": "signup_page()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_signup_page_and_submission"
+          ]
         },
         "src/frontend/frontend.py::create_app.verify_token": {
           "fingerprint": "a4bb5d98b29e5e69",
           "intent": "Validates token using userservice public key",
           "signature": "verify_token(token)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_home_rejects_missing_expired_and_foreign_tokens"
+          ]
         },
         "src/frontend/frontend.py::create_app.version": {
           "fingerprint": "53b98a39e18d19f8",
           "intent": "Service version endpoint",
           "signature": "version()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_probe_endpoints_and_root"
+          ]
         },
         "src/frontend/frontend.py::create_app.whereami": {
           "fingerprint": "1037654dac3da73f",
           "intent": "Returns the cluster name + zone name where this Pod is running.",
           "signature": "whereami()",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_consent_get_and_callback_branches",
+            "tests/test_frontend.py::TestFrontend::test_probe_endpoints_and_root"
+          ]
         },
         "src/frontend/traced_thread_pool_executor.py::TracedThreadPoolExecutor.__init__": {
           "fingerprint": "e954ca8c2bd5acb2",
           "intent": "Initialize TracedThreadPoolExecutor",
           "signature": "__init__(self, tracer)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels"
+          ]
         },
         "src/frontend/traced_thread_pool_executor.py::TracedThreadPoolExecutor.submit": {
           "fingerprint": "5b65ee33d3cd87d0",
           "intent": "Submit a new task to the thread pool.",
           "signature": "submit(self, function)",
-          "tests": []
+          "tests": [
+            "tests/test_frontend.py::TestFrontend::test_home_renders_api_data_and_contact_labels",
+            "tests/test_traced_thread_pool_executor.py::TestTracedThreadPoolExecutor::test_submit_attaches_current_context"
+          ]
         },
         "src/frontend/traced_thread_pool_executor.py::TracedThreadPoolExecutor.with_otel_context": {
           "fingerprint": "549828275a4d1e3b",
           "intent": "Attach context",
           "signature": "with_otel_context(self, context, function)",
-          "tests": []
+          "tests": [
+            "tests/test_traced_thread_pool_executor.py::TestTracedThreadPoolExecutor::test_submit_attaches_current_context"
+          ]
         }
       }
     },
