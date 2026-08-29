@@ -23,6 +23,8 @@ import io.micrometer.core.instrument.binder.cache.GuavaCacheMetrics;
 import io.micrometer.core.lang.Nullable;
 import io.micrometer.stackdriver.StackdriverConfig;
 import io.micrometer.stackdriver.StackdriverMeterRegistry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 
 import com.auth0.jwt.JWTVerifier;
@@ -34,6 +36,7 @@ import com.google.common.cache.LoadingCache;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.http.HttpStatus;
@@ -216,6 +219,86 @@ class BalanceReaderControllerTest {
         // Then
         assertNotNull(actualResult);
         assertEquals(HttpStatus.UNAUTHORIZED, actualResult.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Given a local transaction between two cached accounts, "
+        + "update both cached balances")
+    void ledgerCallbackUpdatesCachedBalancesForLocalTransaction() {
+        // Given
+        final String fromAccountNum = AUTHED_ACCOUNT_NUM;
+        final String toAccountNum = NON_AUTHED_ACCOUNT_NUM;
+        final int amount = 10;
+        ArgumentCaptor<LedgerReaderCallback> callbackCaptor =
+            ArgumentCaptor.forClass(LedgerReaderCallback.class);
+        verify(ledgerReader).startWithCallback(callbackCaptor.capture());
+        Transaction transaction = mock(Transaction.class);
+        when(transaction.getFromAccountNum()).thenReturn(fromAccountNum);
+        when(transaction.getFromRoutingNum()).thenReturn(LOCAL_ROUTING_NUM);
+        when(transaction.getToAccountNum()).thenReturn(toAccountNum);
+        when(transaction.getToRoutingNum()).thenReturn(LOCAL_ROUTING_NUM);
+        when(transaction.getAmount()).thenReturn(amount);
+        ConcurrentMap<String, Long> cacheMap = new ConcurrentHashMap<>();
+        cacheMap.put(fromAccountNum, BALANCE);
+        cacheMap.put(toAccountNum, BALANCE);
+        when(cache.asMap()).thenReturn(cacheMap);
+
+        // When
+        callbackCaptor.getValue().processTransaction(transaction);
+
+        // Then
+        verify(cache).put(fromAccountNum, BALANCE - amount);
+        verify(cache).put(toAccountNum, BALANCE + amount);
+    }
+
+    @Test
+    @DisplayName("Given a transaction with external routing numbers, "
+        + "do not update the cache")
+    void ledgerCallbackIgnoresTransactionsWithExternalRoutingNums() {
+        // Given
+        final String externalRoutingNum = "999999999";
+        ArgumentCaptor<LedgerReaderCallback> callbackCaptor =
+            ArgumentCaptor.forClass(LedgerReaderCallback.class);
+        verify(ledgerReader).startWithCallback(callbackCaptor.capture());
+        Transaction transaction = mock(Transaction.class);
+        when(transaction.getFromAccountNum()).thenReturn(AUTHED_ACCOUNT_NUM);
+        when(transaction.getFromRoutingNum()).thenReturn(externalRoutingNum);
+        when(transaction.getToAccountNum()).thenReturn(NON_AUTHED_ACCOUNT_NUM);
+        when(transaction.getToRoutingNum()).thenReturn(externalRoutingNum);
+        when(transaction.getAmount()).thenReturn(10);
+        ConcurrentMap<String, Long> cacheMap = new ConcurrentHashMap<>();
+        cacheMap.put(AUTHED_ACCOUNT_NUM, BALANCE);
+        cacheMap.put(NON_AUTHED_ACCOUNT_NUM, BALANCE);
+        when(cache.asMap()).thenReturn(cacheMap);
+
+        // When
+        callbackCaptor.getValue().processTransaction(transaction);
+
+        // Then
+        verify(cache, never()).put(anyString(), anyLong());
+    }
+
+    @Test
+    @DisplayName("Given a local transaction between uncached accounts, "
+        + "do not update the cache")
+    void ledgerCallbackIgnoresUncachedAccounts() {
+        // Given
+        ArgumentCaptor<LedgerReaderCallback> callbackCaptor =
+            ArgumentCaptor.forClass(LedgerReaderCallback.class);
+        verify(ledgerReader).startWithCallback(callbackCaptor.capture());
+        Transaction transaction = mock(Transaction.class);
+        when(transaction.getFromAccountNum()).thenReturn(AUTHED_ACCOUNT_NUM);
+        when(transaction.getFromRoutingNum()).thenReturn(LOCAL_ROUTING_NUM);
+        when(transaction.getToAccountNum()).thenReturn(NON_AUTHED_ACCOUNT_NUM);
+        when(transaction.getToRoutingNum()).thenReturn(LOCAL_ROUTING_NUM);
+        when(transaction.getAmount()).thenReturn(10);
+        when(cache.asMap()).thenReturn(new ConcurrentHashMap<>());
+
+        // When
+        callbackCaptor.getValue().processTransaction(transaction);
+
+        // Then
+        verify(cache, never()).put(anyString(), anyLong());
     }
 
     @Test

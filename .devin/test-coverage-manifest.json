@@ -9,7 +9,11 @@
           "fingerprint": "b95f73610680fbce",
           "intent": "",
           "signature": "initializeCache(@Value(\"${CACHE_SIZE:1000000}\") final Integer expireSize, @Value(\"${LOCAL_ROUTING_NUM}\") String localRoutingNum)",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::defaultsToZeroWhenRepositoryReturnsNull",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::loadsBalanceFromRepositoryOnCacheMiss",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::servesRepeatedReadsFromCache"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/BalanceCache.java::BalanceCache.load": {
           "fingerprint": "6449c29efb51a7b0",
@@ -21,7 +25,9 @@
           "fingerprint": "f7f849b42c790552",
           "intent": "",
           "signature": "destroy()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderApplicationTest.java::destroyCompletesWithoutError"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/BalanceReaderApplication.java::BalanceReaderApplication.enabled": {
           "fingerprint": "6c1e9866a483ea56",
@@ -37,6 +43,9 @@
           "intent": "",
           "signature": "get(String key)",
           "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::defaultsToZeroWhenRepositoryReturnsNull",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::loadsBalanceFromRepositoryOnCacheMiss",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceCacheTest.java::servesRepeatedReadsFromCache",
             "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::StackdriverConfig",
             "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::getBalanceFailsWhenCacheThrowsError",
             "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::getBalanceIsCorrectWhenAccountMatchesAuthenticatedUser",
@@ -75,7 +84,9 @@
           "fingerprint": "a87e0145d680f645",
           "intent": "",
           "signature": "stackdriver()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderApplicationTest.java::stackdriverBuildsMeterRegistry"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/BalanceReaderController.java::BalanceReaderController.BalanceReaderController": {
           "fingerprint": "612bc4d1c9bf5b24",
@@ -132,7 +143,11 @@
           "fingerprint": "6a115f4c56cc6a1c",
           "intent": "",
           "signature": "generateJWTVerifier(@Value(\"${PUB_KEY_PATH}\") final String publicKeyPath)",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::generatesVerifierThatAcceptsValidTokens",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::throwsGenerateKeyExceptionWhenKeyFileIsMissing",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::throwsGenerateKeyExceptionWhenKeyIsMalformed"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/LedgerReader.java::LedgerReader.getLatestTransactionId": {
           "fingerprint": "e2835101b8db0a5d",
@@ -146,7 +161,9 @@
           "signature": "isAlive()",
           "tests": [
             "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::livenessFailsWhenLedgerReaderIsNotAlive",
-            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::livenessSucceedsWhenLedgerReaderIsAlive"
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::livenessSucceedsWhenLedgerReaderIsAlive",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::awaitBackgroundThreadDeath",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::isAliveIsTrueBeforeStart"
           ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/LedgerReader.java::LedgerReader.pollTransactions": {
@@ -165,49 +182,93 @@
           "fingerprint": "f07362324bb7b3f2",
           "intent": "",
           "signature": "startWithCallback(LedgerReaderCallback callback)",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::backgroundThreadDiesWhenRemoteLedgerOutOfSync",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::keepsPollingWhenSleepInterrupted",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::keepsPreviousIdWhenDatabaseUnavailableDuringPoll",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::keepsPreviousIdWhenPollReturnsNoTransactions",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::processesNewTransactionsThroughCallback",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::startWithCallbackThrowsWhenCallbackIsNull",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::startsAtBeginningOfLedgerWhenDatabaseUnavailableAtInit",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/LedgerReaderTest.java::treatsNullLatestTransactionIdAsEmptyLedger"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getAmount": {
           "fingerprint": "6d5385f5fddf9c25",
           "intent": "",
           "signature": "getAmount()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getFromAccountNum": {
           "fingerprint": "83f43f5512f1c215",
           "intent": "",
           "signature": "getFromAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getFromRoutingNum": {
           "fingerprint": "10e573b5be00967c",
           "intent": "",
           "signature": "getFromRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getToAccountNum": {
           "fingerprint": "db251d319def5193",
           "intent": "",
           "signature": "getToAccountNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getToRoutingNum": {
           "fingerprint": "cb71c3321743b9cb",
           "intent": "",
           "signature": "getToRoutingNum()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresTransactionsWithExternalRoutingNums",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackIgnoresUncachedAccounts",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/BalanceReaderControllerTest.java::ledgerCallbackUpdatesCachedBalancesForLocalTransaction",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.getTransactionId": {
           "fingerprint": "2b1311a6af89bf27",
           "intent": "",
           "signature": "getTransactionId()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::gettersReturnFieldValues"
+          ]
         },
         "src/ledger/balancereader/src/main/java/anthos/samples/bankofanthos/balancereader/Transaction.java::Transaction.toString": {
           "fingerprint": "9eea7f162d479085",
           "intent": "",
           "signature": "toString()",
-          "tests": []
+          "tests": [
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::generatesVerifierThatAcceptsValidTokens",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::throwsGenerateKeyExceptionWhenKeyFileIsMissing",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/JWTVerifierGeneratorTest.java::throwsGenerateKeyExceptionWhenKeyIsMalformed",
+            "src/ledger/balancereader/src/test/java/anthos/samples/bankofanthos/balancereader/TransactionTest.java::toStringFormatsAmountInDollars"
+          ]
         }
       }
     },
