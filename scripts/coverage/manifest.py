@@ -34,6 +34,7 @@ def changed_paths(base_ref):
 
 def classify(service, indexed, manifest, limit_to_paths=None):
     recorded = manifest["services"].get(service["name"], {}).get("units", {})
+    allowed = None
     if limit_to_paths is not None:
         allowed = set(limit_to_paths)
         indexed = {unit: data for unit, data in indexed.items() if data["unit"].split("::")[0] in allowed}
@@ -46,8 +47,10 @@ def classify(service, indexed, manifest, limit_to_paths=None):
             result["stale"].append({**data, "tests": entry["tests"], "recorded_intent": entry.get("intent", "")})
         else:
             result["current"].append(data)
-    if limit_to_paths is None:
-        result["orphaned"] = sorted(set(recorded) - set(indexed))
+    gone = set(recorded) - set(indexed)
+    if allowed is not None:
+        gone = {unit for unit in gone if unit.split("::")[0] in allowed}
+    result["orphaned"] = sorted(gone)
     return result
 
 

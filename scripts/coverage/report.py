@@ -8,6 +8,7 @@ be judged against a single threshold.
 import argparse
 import csv
 import os
+import shlex
 import subprocess
 import sys
 import xml.etree.ElementTree as ElementTree
@@ -33,10 +34,22 @@ def _jacoco_lines(report_path):
     return covered, total
 
 
+def command_cwd(service):
+    return os.path.join(REPO_ROOT, service.get("command_cwd", service["path"]))
+
+
+def command_argv(service, extra=()):
+    """Registry commands are argv, never shell input: no shell metacharacters apply."""
+    argv = shlex.split(service["command"]) + list(extra)
+    if os.sep in argv[0]:
+        argv[0] = os.path.join(command_cwd(service), argv[0])
+    return argv
+
+
 def run_tests(service):
-    cwd = os.path.join(REPO_ROOT, service.get("command_cwd", service["path"]))
-    print(f"--- {service['name']}: {service['command']}", flush=True)
-    return subprocess.run(service["command"], shell=True, cwd=cwd, check=False).returncode
+    argv = command_argv(service)
+    print(f"--- {service['name']}: {' '.join(argv)}", flush=True)
+    return subprocess.run(argv, cwd=command_cwd(service), check=False).returncode
 
 
 def read_coverage(service):
