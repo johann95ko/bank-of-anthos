@@ -733,25 +733,36 @@
           "fingerprint": "4ddf16af3540724c",
           "intent": "",
           "signature": "GenerateKeyException(String message, Exception e)",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateKeyExceptionKeepsMessageAndCause"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGenerator.java::JWTVerifierGenerator.generateJWTVerifier": {
           "fingerprint": "6a115f4c56cc6a1c",
           "intent": "",
           "signature": "generateJWTVerifier(@Value(\"${PUB_KEY_PATH}\") final String publicKeyPath)",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsTokenSignedWithMatchingKey",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyFileMissing",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyIsNotAnRSAKey",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierRejectsTokenSignedWithOtherKey"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.destroy": {
           "fingerprint": "24ed99959ccbcd2b",
           "intent": "",
           "signature": "destroy()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::destroy"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.enabled": {
           "fingerprint": "6c1e9866a483ea56",
           "intent": "",
           "signature": "enabled()",
           "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverIsCreatedWithMetricsExportDisabled",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::StackdriverConfig",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::setUp"
           ]
@@ -761,6 +772,9 @@
           "intent": "",
           "signature": "get(String key)",
           "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::configOf",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverResourceDescribesTheContainer",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::StackdriverConfig",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::setUp"
           ]
@@ -769,13 +783,20 @@
           "fingerprint": "2fc7b7c2f490db50",
           "intent": "",
           "signature": "main(String[] args)",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::mainStartsTheApplication",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.projectId": {
           "fingerprint": "b5cf0549651753c9",
           "intent": "",
           "signature": "projectId()",
           "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverIsCreatedWithMetricsExportDisabled",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverProjectIdIsEmptyWhenMetadataIsUnavailable",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::StackdriverConfig",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::setUp"
           ]
@@ -784,25 +805,40 @@
           "fingerprint": "ddc330f3ecd6226b",
           "intent": "",
           "signature": "resourceLabels()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverResourceDescribesTheContainer",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.resourceType": {
           "fingerprint": "6c27e1891630f94a",
           "intent": "",
           "signature": "resourceType()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverResourceDescribesTheContainer",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.restTemplate": {
           "fingerprint": "1e8f145aee60d8ae",
           "intent": "",
           "signature": "restTemplate()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::restTemplate"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplication.java::LedgerWriterApplication.stackdriver": {
           "fingerprint": "a87e0145d680f645",
           "intent": "",
           "signature": "stackdriver()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverIsCreatedWithMetricsExportDisabled",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverProjectIdIsEmptyWhenMetadataIsUnavailable",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::stackdriverResourceDescribesTheContainer",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterApplicationTest.java::try"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterController.java::LedgerWriterController.addTransaction": {
           "fingerprint": "96788e13589ddbb4",
@@ -940,13 +976,20 @@
           "fingerprint": "2b1311a6af89bf27",
           "intent": "",
           "signature": "getTransactionId()",
-          "tests": []
+          "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/TransactionTest.java::getTransactionIdAfterItIsGenerated",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/TransactionTest.java::getTransactionIdBeforeItIsGenerated"
+          ]
         },
         "src/ledger/ledgerwriter/src/main/java/anthos/samples/bankofanthos/ledgerwriter/Transaction.java::Transaction.toString": {
           "fingerprint": "9eea7f162d479085",
           "intent": "",
           "signature": "toString()",
           "tests": [
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierAcceptsTokenSignedWithMatchingKey",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyFileMissing",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierFailsWhenKeyIsNotAnRSAKey",
+            "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/JWTVerifierGeneratorTest.java::generateJWTVerifierRejectsTokenSignedWithOtherKey",
             "src/ledger/ledgerwriter/src/test/java/anthos/samples/bankofanthos/ledgerwriter/LedgerWriterControllerTest.java::addTransactionWhenHttpServerErrorExceptionThrown"
           ]
         },
