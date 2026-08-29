@@ -975,73 +975,104 @@
           "fingerprint": "e30f61cac5959fbe",
           "intent": "POST to /deposit, depositing external money into account",
           "signature": "deposit(self, amount)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_deposit_fails_when_no_url",
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_deposit_posts_external_account_and_random_amount"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.login": {
           "fingerprint": "d4bf516655d90977",
           "intent": "sends POST request to /login with stored credentials",
           "signature": "login(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_login_fails_without_token_cookie",
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_login_succeeds_when_token_cookie_returned"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.logout": {
           "fingerprint": "5f0fc1ea30b07fdf",
           "intent": "sends a /logout POST request",
           "signature": "logout(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_logout_clears_username_and_interrupts",
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_logout_without_redirect_stays_logged_on"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.on_start": {
           "fingerprint": "77c774342e7cac43",
           "intent": "on start, deposit a large balance into each account",
           "signature": "on_start(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_on_start_deposits_large_starting_balance"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.payment": {
           "fingerprint": "acc1d45565b2b2fa",
           "intent": "POST to /payment, sending money to other account",
           "signature": "payment(self, amount)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_payment_fails_when_no_url",
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_payment_posts_random_amount_to_known_account"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.view_home": {
           "fingerprint": "3c09610372c45c8e",
           "intent": "load the /home page (identical to /)",
           "signature": "view_home(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_view_home_fails_on_redirect_to_login"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.AuthenticatedTasks.view_index": {
           "fingerprint": "cd5ba3aa8adb7ac6",
           "intent": "load the / page",
           "signature": "view_index(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestAuthenticatedTasks::test_view_index_fails_on_redirect_to_login"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.UnauthenticatedTasks.signup": {
           "fingerprint": "3240618b2bdfc187",
           "intent": "sends POST request to /signup to create a new user",
           "signature": "signup(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestUnauthenticatedTasks::test_signup_keeps_running_unauthenticated_on_failure",
+            "tests/test_locustfile.py::TestUnauthenticatedTasks::test_signup_stores_username_and_interrupts_on_success"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.UnauthenticatedTasks.view_login": {
           "fingerprint": "bf45947e2cdd4768",
           "intent": "load the /login page",
           "signature": "view_login(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestUnauthenticatedTasks::test_view_login_fails_on_redirect_to_home"
+          ]
         },
         "src/loadgenerator/locustfile.py::AllTasks.UnauthenticatedTasks.view_signup": {
           "fingerprint": "20413c62f9fd100f",
           "intent": "load the /signup page",
           "signature": "view_signup(self)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestUnauthenticatedTasks::test_view_signup_fails_on_redirect_to_home"
+          ]
         },
         "src/loadgenerator/locustfile.py::generate_username": {
           "fingerprint": "1b04a84d5f75ea8c",
           "intent": "generates random 15 character",
           "signature": "generate_username()",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestHelpers::test_generate_username_returns_random_alphanumeric_name"
+          ]
         },
         "src/loadgenerator/locustfile.py::signup_helper": {
           "fingerprint": "530d0c7b3a07615c",
           "intent": "create a new user account in the system",
           "signature": "signup_helper(locust, username)",
-          "tests": []
+          "tests": [
+            "tests/test_locustfile.py::TestHelpers::test_signup_helper_returns_false_when_no_redirects",
+            "tests/test_locustfile.py::TestHelpers::test_signup_helper_returns_false_when_no_token_cookie",
+            "tests/test_locustfile.py::TestHelpers::test_signup_helper_returns_true_when_token_cookie_returned"
+          ]
         }
       }
     },
