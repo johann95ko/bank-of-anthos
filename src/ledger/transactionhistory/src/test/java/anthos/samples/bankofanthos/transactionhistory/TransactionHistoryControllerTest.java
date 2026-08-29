@@ -18,6 +18,8 @@ package anthos.samples.bankofanthos.transactionhistory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -32,10 +34,14 @@ import io.micrometer.core.lang.Nullable;
 import io.micrometer.stackdriver.StackdriverConfig;
 import io.micrometer.stackdriver.StackdriverMeterRegistry;
 import java.util.Deque;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +69,8 @@ class TransactionHistoryControllerTest {
 
     private static final String VERSION = "v0.2.0";
     private static final String LOCAL_ROUTING_NUM = "123456789";
+    private static final String REMOTE_ROUTING_NUM = "987654321";
+    private static final int HISTORY_LIMIT = 100;
     private static final String OK_CODE = "ok";
     private static final String JWT_ACCOUNT_KEY = "acct";
     private static final String AUTHED_ACCOUNT_NUM = "1234567890";
@@ -96,8 +104,32 @@ class TransactionHistoryControllerTest {
         transactionHistoryController = new TransactionHistoryController(ledgerReader,
             meterRegistry, verifier, PUBLIC_KEY_PATH, cache, LOCAL_ROUTING_NUM, VERSION);
 
+        TestFields.set(transactionHistoryController, "historyLimit",
+            HISTORY_LIMIT);
+
         when(verifier.verify(TOKEN)).thenReturn(jwt);
         when(jwt.getClaim(JWT_ACCOUNT_KEY)).thenReturn(claim);
+    }
+
+    /**
+     * Returns the callback the controller registered with the LedgerReader.
+     */
+    private LedgerReaderCallback ledgerCallback() {
+        final ArgumentCaptor<LedgerReaderCallback> captor =
+            ArgumentCaptor.forClass(LedgerReaderCallback.class);
+        verify(ledgerReader).startWithCallback(captor.capture());
+        return captor.getValue();
+    }
+
+    private Transaction transaction(String fromAccountNum,
+            String fromRoutingNum, String toAccountNum, String toRoutingNum) {
+        final Transaction transaction = new Transaction();
+        TestFields.set(transaction, "fromAccountNum", fromAccountNum);
+        TestFields.set(transaction, "fromRoutingNum", fromRoutingNum);
+        TestFields.set(transaction, "toAccountNum", toAccountNum);
+        TestFields.set(transaction, "toRoutingNum", toRoutingNum);
+        TestFields.set(transaction, "amount", 100);
+        return transaction;
     }
 
     @Test
@@ -199,6 +231,125 @@ class TransactionHistoryControllerTest {
         // Then
         assertNotNull(actualResult);
         assertEquals(HttpStatus.UNAUTHORIZED, actualResult.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Given extra latency is configured, still return the transactions")
+    void getTransactionsAppliesArtificialLatency() throws Exception {
+        // Given
+        TestFields.set(transactionHistoryController, "extraLatencyMillis", 1);
+        when(claim.asString()).thenReturn(AUTHED_ACCOUNT_NUM);
+        when(cache.get(AUTHED_ACCOUNT_NUM)).thenReturn(transactions);
+
+        // When
+        final ResponseEntity actualResult = transactionHistoryController
+            .getTransactions(BEARER_TOKEN, AUTHED_ACCOUNT_NUM);
+
+        // Then
+        assertNotNull(actualResult);
+        assertEquals(HttpStatus.OK, actualResult.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Given a token without the 'Bearer ' prefix, verify it as is")
+    void getTransactionsAcceptsRawToken() throws Exception {
+        // Given
+        when(claim.asString()).thenReturn(AUTHED_ACCOUNT_NUM);
+        when(cache.get(AUTHED_ACCOUNT_NUM)).thenReturn(transactions);
+
+        // When
+        final ResponseEntity actualResult = transactionHistoryController
+            .getTransactions(TOKEN, AUTHED_ACCOUNT_NUM);
+
+        // Then
+        assertEquals(HttpStatus.OK, actualResult.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Given a new transaction for a cached local account, "
+            + "prepend it to that account's cached history")
+    void ledgerCallbackCachesTransactionsForBothLocalAccounts() {
+        // Given
+        final Deque<Transaction> fromHistory = new LinkedList<>();
+        final Deque<Transaction> toHistory = new LinkedList<>();
+        final ConcurrentMap<String, Deque<Transaction>> cacheMap =
+            new ConcurrentHashMap<>();
+        cacheMap.put(AUTHED_ACCOUNT_NUM, fromHistory);
+        cacheMap.put(NON_AUTHED_ACCOUNT_NUM, toHistory);
+        when(cache.asMap()).thenReturn(cacheMap);
+        final Transaction transaction = transaction(AUTHED_ACCOUNT_NUM,
+            LOCAL_ROUTING_NUM, NON_AUTHED_ACCOUNT_NUM, LOCAL_ROUTING_NUM);
+
+        // When
+        ledgerCallback().processTransaction(transaction);
+
+        // Then
+        assertEquals(1, fromHistory.size());
+        assertEquals(transaction, fromHistory.getFirst());
+        assertEquals(1, toHistory.size());
+        assertEquals(transaction, toHistory.getFirst());
+    }
+
+    @Test
+    @DisplayName("Given a transaction for accounts at another bank, "
+            + "leave the cache untouched")
+    void ledgerCallbackIgnoresRemoteRoutingNumbers() {
+        // Given
+        final Deque<Transaction> history = new LinkedList<>();
+        final ConcurrentMap<String, Deque<Transaction>> cacheMap =
+            new ConcurrentHashMap<>();
+        cacheMap.put(AUTHED_ACCOUNT_NUM, history);
+        when(cache.asMap()).thenReturn(cacheMap);
+
+        // When
+        ledgerCallback().processTransaction(transaction(AUTHED_ACCOUNT_NUM,
+            REMOTE_ROUTING_NUM, AUTHED_ACCOUNT_NUM, REMOTE_ROUTING_NUM));
+
+        // Then
+        assertTrue(history.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Given a transaction for an account that is not cached, "
+            + "do not load it into the cache")
+    void ledgerCallbackIgnoresUncachedAccounts() {
+        // Given
+        final ConcurrentMap<String, Deque<Transaction>> cacheMap =
+            new ConcurrentHashMap<>();
+        when(cache.asMap()).thenReturn(cacheMap);
+
+        // When
+        ledgerCallback().processTransaction(transaction(AUTHED_ACCOUNT_NUM,
+            LOCAL_ROUTING_NUM, NON_AUTHED_ACCOUNT_NUM, LOCAL_ROUTING_NUM));
+
+        // Then
+        assertTrue(cacheMap.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Given a cached history at the history limit, "
+            + "drop the oldest transaction")
+    void ledgerCallbackDropsTransactionsBeyondHistoryLimit() {
+        // Given
+        TestFields.set(transactionHistoryController, "historyLimit", 2);
+        final Transaction oldest = transaction(AUTHED_ACCOUNT_NUM,
+            LOCAL_ROUTING_NUM, NON_AUTHED_ACCOUNT_NUM, REMOTE_ROUTING_NUM);
+        final Deque<Transaction> history = new LinkedList<>();
+        history.add(oldest);
+        history.add(oldest);
+        final ConcurrentMap<String, Deque<Transaction>> cacheMap =
+            new ConcurrentHashMap<>();
+        cacheMap.put(AUTHED_ACCOUNT_NUM, history);
+        when(cache.asMap()).thenReturn(cacheMap);
+        final Transaction newest = transaction(AUTHED_ACCOUNT_NUM,
+            LOCAL_ROUTING_NUM, NON_AUTHED_ACCOUNT_NUM, REMOTE_ROUTING_NUM);
+
+        // When
+        ledgerCallback().processTransaction(newest);
+
+        // Then
+        assertEquals(2, history.size());
+        assertEquals(newest, history.getFirst());
     }
 
     @Test
