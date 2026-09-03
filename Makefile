@@ -90,6 +90,21 @@ test-unit:
 		(cd src/$$SERVICE && uv run pytest -v -p no:warnings); \
 	done
 
+test-coverage:
+	python3 scripts/coverage/report.py
+
+coverage-report:
+	python3 scripts/coverage/report.py --no-run
+
+coverage-manifest-check:
+	python3 scripts/coverage/manifest.py check
+
+coverage-manifest-sync:
+	python3 scripts/coverage/manifest.py sync
+
+coverage-manifest-map:
+	python3 scripts/coverage/map_tests.py
+
 upgrade-py-deps:
 	for SERVICE in "frontend" "accounts/contacts" "accounts/userservice" "loadgenerator"; \
 	do \

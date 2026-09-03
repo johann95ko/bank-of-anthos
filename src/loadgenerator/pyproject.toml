@@ -21,3 +21,16 @@ requires-python = ">=3.14"
 dependencies = [
     "locust>=2.42.6",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["."]
+omit = ["tests/*", ".venv/*"]
