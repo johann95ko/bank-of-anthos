@@ -23,7 +23,7 @@ from unit_index import index_service
 
 def changed_paths(base_ref):
     diff = subprocess.run(
-        ["git", "diff", "--name-only", f"{base_ref}...HEAD"],
+        ["git", "diff", "--name-only", "--no-renames", f"{base_ref}...HEAD"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
